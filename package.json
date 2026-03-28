@@ -1,0 +1,26 @@
+{
+  "name": "tree-sitter-jerboa",
+  "version": "1.0.0",
+  "description": "Tree-sitter grammar for Jerboa Scheme",
+  "main": "bindings/node",
+  "keywords": [
+    "tree-sitter",
+    "parser",
+    "scheme",
+    "jerboa",
+    "chez-scheme"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.18.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.24.0"
+  },
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "build": "tree-sitter generate && node-gyp build",
+    "test": "tree-sitter test",
+    "parse": "tree-sitter parse"
+  }
+}

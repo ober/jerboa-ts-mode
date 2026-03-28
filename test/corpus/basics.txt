@@ -1,0 +1,266 @@
+================
+Simple definition
+================
+
+(def x 42)
+
+---
+
+(source_file
+  (list
+    (definition
+      keyword: (def_keyword)
+      name: (symbol)
+      (number))))
+
+================
+Function definition
+================
+
+(def (add x y)
+  (+ x y))
+
+---
+
+(source_file
+  (list
+    (definition
+      keyword: (def_keyword)
+      name: (symbol)
+      (symbol)
+      (symbol)
+      (list
+        (symbol)
+        (symbol)
+        (symbol)))))
+
+================
+Defstruct
+================
+
+(defstruct point (x y))
+
+---
+
+(source_file
+  (list
+    (type_definition
+      keyword: (type_keyword)
+      name: (symbol)
+      (list
+        (symbol)
+        (symbol)))))
+
+================
+Import
+================
+
+(import (jerboa prelude))
+
+---
+
+(source_file
+  (list
+    (import_form
+      keyword: (import_keyword)
+      (list
+        (symbol)
+        (symbol)))))
+
+================
+Bracket list
+================
+
+[1 2 3]
+
+---
+
+(source_file
+  (bracket_list
+    (number)
+    (number)
+    (number)))
+
+================
+Brace dispatch
+================
+
+{method obj arg}
+
+---
+
+(source_file
+  (brace_list
+    (symbol)
+    (symbol)
+    (symbol)))
+
+================
+Keywords
+================
+
+(f name: "alice" age: 30)
+
+---
+
+(source_file
+  (list
+    (symbol)
+    (keyword)
+    (string)
+    (keyword)
+    (number)))
+
+================
+Quote and unquote
+================
+
+'(a b c)
+`(a ,b ,@c)
+
+---
+
+(source_file
+  (quote
+    (list
+      (symbol)
+      (symbol)
+      (symbol)))
+  (quasiquote
+    (list
+      (symbol)
+      (unquote
+        (symbol))
+      (unquote_splicing
+        (symbol)))))
+
+================
+Match form
+================
+
+(match x
+  (42 "exact")
+  (_ "default"))
+
+---
+
+(source_file
+  (list
+    (match_form
+      keyword: (match_keyword)
+      (symbol)
+      (list
+        (number)
+        (string))
+      (list
+        (symbol)
+        (string)))))
+
+================
+Line comment
+================
+
+;; this is a comment
+(def x 1)
+
+---
+
+(source_file
+  (comment)
+  (list
+    (definition
+      keyword: (def_keyword)
+      name: (symbol)
+      (number))))
+
+================
+Boolean constants
+================
+
+#t
+#f
+
+---
+
+(source_file
+  (boolean)
+  (boolean))
+
+================
+Character literals
+================
+
+#\a
+#\space
+
+---
+
+(source_file
+  (character)
+  (character))
+
+================
+For collect
+================
+
+(for/collect ((x (in-range 5))) (* x x))
+
+---
+
+(source_file
+  (list
+    (for_form
+      keyword: (for_keyword)
+      (list
+        (list
+          (symbol)
+          (list
+            (symbol)
+            (number))))
+      (list
+        (symbol)
+        (symbol)
+        (symbol)))))
+
+================
+Lambda
+================
+
+(lambda (x) (* x x))
+
+---
+
+(source_file
+  (list
+    (lambda_form
+      keyword: (lambda_keyword)
+      (list
+        (symbol))
+      (list
+        (symbol)
+        (symbol)
+        (symbol)))))
+
+================
+Defmethod
+================
+
+(defmethod (area (self circle))
+  (* pi (circle-radius self)))
+
+---
+
+(source_file
+  (list
+    (method_definition
+      keyword: (method_keyword)
+      name: (symbol)
+      (list
+        (symbol)
+        (symbol))
+      (list
+        (symbol)
+        (symbol)
+        (list
+          (symbol)
+          (symbol))))))
